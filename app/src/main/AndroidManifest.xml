@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".projects.ProjectSelectionActivity" />
-        <activity android:name=".validatetype.ValidateTypeActivity"></activity>
+        <activity android:name=".validatetype.ValidateTypeActivity" />
+        <activity android:name=".users.UserSelectionActivity"></activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.cloudwalkdigital.validateapp.projects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.cloudwalkdigital.validateapp.R;
 import com.cloudwalkdigital.validateapp.data.models.JobOrder;
+import com.cloudwalkdigital.validateapp.validatetype.ValidateTypeActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -138,6 +140,8 @@ public class ProjectSelectionActivity extends AppCompatActivity {
                     // We can access the data within the views
                     Toast.makeText(getContext(), project.getProjectName(), Toast.LENGTH_SHORT).show();
 
+                    Intent intent = new Intent(ProjectSelectionActivity.this, ValidateTypeActivity.class);
+                    startActivity(intent);
                 }
             }
         }
