@@ -17,7 +17,7 @@
         android:layout_marginTop="0dp">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/pre_event_image"
             android:layout_width="match_parent"
             android:layout_height="265dp"
             android:adjustViewBounds="true"

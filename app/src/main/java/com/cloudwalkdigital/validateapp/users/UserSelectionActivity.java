@@ -1,4 +1,4 @@
-package com.cloudwalkdigital.validateapp.projects;
+package com.cloudwalkdigital.validateapp.users;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cloudwalkdigital.validateapp.R;
-import com.cloudwalkdigital.validateapp.data.models.JobOrder;
-import com.cloudwalkdigital.validateapp.validatetype.ValidateTypeActivity;
+import com.cloudwalkdigital.validateapp.data.models.User;
+import com.cloudwalkdigital.validateapp.projects.ProjectSelectionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,31 +23,30 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProjectSelectionActivity extends AppCompatActivity {
+public class UserSelectionActivity extends AppCompatActivity {
 
-    @BindView(R.id.rvProjects) RecyclerView mRecyclerViewEvents;
-    private List<JobOrder> projects;
+    @BindView(R.id.rvUsers) RecyclerView mRecyclerViewEvents;
+    private List<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_project_selection);
+        setContentView(R.layout.activity_user_selection);
 
         ButterKnife.bind(this);
 
         mRecyclerViewEvents.setHasFixedSize(true);
 
-        projects = new ArrayList<JobOrder>();
-        for (int i = 1; i <= 5; ++i) {
-            projects.add(new JobOrder("Project "+i, "June 0"+ i, "58BD0B7D68C5"+ i)); //test data
-        }
+        users = new ArrayList<User>();
+        users.add(new User("Jane", "Doe", "Inventory")); //test data
+        users.add(new User("John", "Doe", "Creatives")); //test data
 
         // Create adapter passing in the sample user data
-        ProjectAdapter adapter = new ProjectAdapter(ProjectSelectionActivity.this, projects);
+        UserSelectionActivity.UserAdapter adapter = new UserSelectionActivity.UserAdapter(UserSelectionActivity.this, users);
         // Attach the adapter to the recyclerview to populate items
         mRecyclerViewEvents.setAdapter(adapter);
         // Set layout manager to position the items
-        LinearLayoutManager layoutManager = new LinearLayoutManager(ProjectSelectionActivity.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(UserSelectionActivity.this);
         mRecyclerViewEvents.setLayoutManager(layoutManager);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mRecyclerViewEvents.getContext(),
@@ -59,14 +58,14 @@ public class ProjectSelectionActivity extends AppCompatActivity {
     /**
      * Project Adapter
      */
-    public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHolder> {
+    public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
-        private List<JobOrder> mProject;
+        private List<User> mUser;
 
         private Context mContext;
 
-        public ProjectAdapter(Context mContext, List<JobOrder> mProject) {
-            this.mProject = mProject;
+        public UserAdapter(Context mContext, List<User> mUser) {
+            this.mUser = mUser;
             this.mContext = mContext;
         }
 
@@ -81,7 +80,7 @@ public class ProjectSelectionActivity extends AppCompatActivity {
             LayoutInflater inflater = LayoutInflater.from(context);
 
             // Inflate the custom layout
-            View contactView = inflater.inflate(R.layout.item_project, parent, false);
+            View contactView = inflater.inflate(R.layout.item_user, parent, false);
 
             // Return a new holder instance
             ViewHolder viewHolder = new ViewHolder(contactView);
@@ -91,22 +90,19 @@ public class ProjectSelectionActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             // Get the data model based on position
-            JobOrder project = mProject.get(position);
+            User user = mUser.get(position);
 
             // Set item views based on your views and data model
             TextView textView = holder.nameTextView;
-            textView.setText(project.getProjectName());
+            textView.setText(user.getFirstName()+" "+ user.getLastName());
 
-            TextView deadline = holder.deadlineTextView;
-            deadline.setText(project.getDeadline());
-
-            TextView jobOrderNo = holder.joTextView;
-            jobOrderNo.setText(project.getJobOrderNo());
+            TextView department = holder.departmentTextView;
+            department.setText(user.getDepartment());
         }
 
         @Override
         public int getItemCount() {
-            return mProject.size();
+            return mUser.size();
         }
 
         // Provide a direct reference to each of the views within a data item
@@ -115,8 +111,7 @@ public class ProjectSelectionActivity extends AppCompatActivity {
             // Your holder should contain a member variable
             // for any view that will be set as you render a row
             public TextView nameTextView;
-            public TextView deadlineTextView;
-            public TextView joTextView;
+            public TextView departmentTextView;
 
             // We also create a constructor that accepts the entire item row
             // and does the view lookups to find each subview
@@ -125,9 +120,8 @@ public class ProjectSelectionActivity extends AppCompatActivity {
                 // to access the context from any ViewHolder instance.
                 super(itemView);
 
-                nameTextView = (TextView) itemView.findViewById(R.id.project_name);
-                deadlineTextView = (TextView) itemView.findViewById(R.id.deadline);
-                joTextView = (TextView) itemView.findViewById(R.id.job_order_no);
+                nameTextView = (TextView) itemView.findViewById(R.id.user_name);
+                departmentTextView = (TextView) itemView.findViewById(R.id.department_name);
 
                 itemView.setOnClickListener(this);
             }
@@ -135,13 +129,10 @@ public class ProjectSelectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 if (position != RecyclerView.NO_POSITION) {
-                    JobOrder project = mProject.get(position);
+                    User user = mUser.get(position);
 
                     // We can access the data within the views
-                    Toast.makeText(getContext(), project.getProjectName(), Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(ProjectSelectionActivity.this, ValidateTypeActivity.class);
-                    startActivity(intent);
+                    Toast.makeText(getContext(), user.getDepartment(), Toast.LENGTH_SHORT).show();
                 }
             }
         }
