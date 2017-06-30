@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.cloudwalkdigital.validateapp.R;
 import com.cloudwalkdigital.validateapp.data.models.User;
 import com.cloudwalkdigital.validateapp.projects.ProjectSelectionActivity;
+import com.cloudwalkdigital.validateapp.questions.QuestionActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -133,6 +134,9 @@ public class UserSelectionActivity extends AppCompatActivity {
 
                     // We can access the data within the views
                     Toast.makeText(getContext(), user.getDepartment(), Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(UserSelectionActivity.this, QuestionActivity.class);
+                    startActivity(intent);
                 }
             }
         }

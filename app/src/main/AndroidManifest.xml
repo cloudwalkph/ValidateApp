@@ -20,7 +20,9 @@
         </activity>
         <activity android:name=".projects.ProjectSelectionActivity" />
         <activity android:name=".validatetype.ValidateTypeActivity" />
-        <activity android:name=".users.UserSelectionActivity"></activity>
+        <activity android:name=".users.UserSelectionActivity" />
+        <activity android:name=".questions.QuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
