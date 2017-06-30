@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/setup"
+        android:background="@color/creatives"
         android:fitsSystemWindows="true"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,19 +58,15 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="650dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_container">
 
         <include
-            layout="@layout/question_counter"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
+            layout="@layout/question_counter" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vpQuestions"
